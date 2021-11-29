@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView urlgethero;
     TextView searchResults;
+    TextView mensajeError;
 
 
     @Override
@@ -77,11 +79,28 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute (String s){
             if (s != null && !s.equals("")){
+                MostrarDatos();
                 searchResults.setText(s);
-            }
+            }  else {
+                MostrarError();
+        }
         }
 
     }
+
+    private void MostrarDatos(){
+        mensajeError.setVisibility(View.INVISIBLE);
+        searchResults.setVisibility(View.VISIBLE);
+    }
+
+
+    private void MostrarError(){
+        searchResults.setVisibility(View.INVISIBLE);
+        mensajeError.setVisibility(View.VISIBLE);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
         urlgethero = (TextView) findViewById(R.id.urlhero);
         searchResults = (TextView) findViewById(R.id.search_results);
+        mensajeError = (TextView) findViewById(R.id.error_message);
+
     }
 
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HERO</string>
+    <string name="error_message">Se ha producido un error, vuelve a intentarlo más tarde......</string>
 </resources>
