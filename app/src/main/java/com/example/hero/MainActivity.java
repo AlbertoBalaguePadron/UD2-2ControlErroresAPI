@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     TextView urlgethero;
     TextView searchResults;
     TextView mensajeError;
+    ProgressBar Gifcarga;
+
 
 
     @Override
@@ -62,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
     public class ResultadoBusqueda extends AsyncTask<URL, Void, String> {
 
+        protected void onPreExecute() {
+            Gifcarga.setVisibility(View.VISIBLE);
+        }
+
         @Override
         protected String doInBackground(URL... urls) {
             URL searchUrl = urls[0];
@@ -78,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute (String s){
+            Gifcarga.setVisibility(View.INVISIBLE);
+
             if (s != null && !s.equals("")){
                 MostrarDatos();
                 searchResults.setText(s);
@@ -110,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         urlgethero = (TextView) findViewById(R.id.urlhero);
         searchResults = (TextView) findViewById(R.id.search_results);
         mensajeError = (TextView) findViewById(R.id.error_message);
+
+        Gifcarga = (ProgressBar) findViewById(R.id.request_progress);
 
     }
 
